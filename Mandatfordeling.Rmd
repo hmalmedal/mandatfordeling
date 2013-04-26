@@ -4,44 +4,7 @@ Fordeling av stortingsmandatene
 Dette er en oversikt over fordelingene av stortingsmandatene. De to første tabellene bruker de faktiske tallene for folketall og areal, mens resten bruker Statistisk sentralbyrås framskrevne befolkningstall.
 
 ```{r data,echo=FALSE}
-Mandatfordelingsdata <-
-  read.csv("Mandatfordelingsdata.csv", sep=";")
-Mandatfordelingsdata <- transform(Mandatfordelingsdata,
-                                  År=as.factor(År))
-source('saintelague.R')
-Mandatfordelingsdata$Mandater <-
-  c(
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2004, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2004, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2012, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2012, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2020, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2020, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2028, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2028, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2036, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2036, ]$Folketall)
-    )
+source('mandater.R')
 ```
 
 ```{r print, results='asis',echo=FALSE}

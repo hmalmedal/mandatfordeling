@@ -24,44 +24,7 @@ for folketall og areal, mens tabell~\ref{tab:m2020} til
 befolkningstall.
 
 <<init, echo=FALSE>>=
-Mandatfordelingsdata <-
-  read.csv("Mandatfordelingsdata.csv", sep=";")
-Mandatfordelingsdata <- transform(Mandatfordelingsdata,
-                                  År=as.factor(År))
-source('saintelague.R')
-Mandatfordelingsdata$Mandater <-
-  c(
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2004, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2004, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2012, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2012, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2020, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2020, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2028, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2028, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År==2036, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År==2036, ]$Folketall)
-    )
+source('mandater.R')
 library("xtable")
 mandattabell <- function(år) {
   m <- subset(Mandatfordelingsdata, År == år)
