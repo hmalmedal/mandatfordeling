@@ -30,8 +30,11 @@ mandattabell <- function(år) {
                                    sep = ""),
                      digits = 0),
               include.rownames = FALSE,
+              print.results = FALSE,
               caption.placement = "top",
               type="html")
+  mx <- gsub("> -", "> &minus;", mx)
+  cat(mx)
   }
 ```
 
