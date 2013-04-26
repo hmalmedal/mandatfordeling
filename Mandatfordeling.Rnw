@@ -1,0 +1,115 @@
+\documentclass[captions=tableheading,norsk,DIV=calc]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\usepackage{libertine}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\sisetup{locale = DE}
+\sisetup{mode = text}
+\sisetup{group-minimum-digits = 4}
+\begin{document}
+
+\title{Fordeling av stortingsmandatene}
+\author{Håkon Malmedal}
+\date{}
+\maketitle
+
+\noindent
+Dette er en oversikt over fordelingene av stortingsmandatene.
+Tabell~\ref{tab:m2004} og \ref{tab:m2012} bruker de faktiske tallene
+for folketall og areal, mens tabell~\ref{tab:m2020} til
+\ref{tab:m2036} bruker Statistisk sentralbyrås framskrevne
+befolkningstall.
+
+<<init, echo=FALSE>>=
+Mandatfordelingsdata <-
+  read.csv("Mandatfordelingsdata.csv", sep=";")
+Mandatfordelingsdata <- transform(Mandatfordelingsdata,
+                                  År=as.factor(År))
+source('saintelague.R')
+Mandatfordelingsdata$Mandater <-
+  c(
+    saintelague(169,
+                Mandatfordelingsdata[
+                  Mandatfordelingsdata$År==2004, ]$Areal * 1.8
+                +
+                  Mandatfordelingsdata[
+                    Mandatfordelingsdata$År==2004, ]$Folketall),
+    saintelague(169,
+                Mandatfordelingsdata[
+                  Mandatfordelingsdata$År==2012, ]$Areal * 1.8
+                +
+                  Mandatfordelingsdata[
+                    Mandatfordelingsdata$År==2012, ]$Folketall),
+    saintelague(169,
+                Mandatfordelingsdata[
+                  Mandatfordelingsdata$År==2020, ]$Areal * 1.8
+                +
+                  Mandatfordelingsdata[
+                    Mandatfordelingsdata$År==2020, ]$Folketall),
+    saintelague(169,
+                Mandatfordelingsdata[
+                  Mandatfordelingsdata$År==2028, ]$Areal * 1.8
+                +
+                  Mandatfordelingsdata[
+                    Mandatfordelingsdata$År==2028, ]$Folketall),
+    saintelague(169,
+                Mandatfordelingsdata[
+                  Mandatfordelingsdata$År==2036, ]$Areal * 1.8
+                +
+                  Mandatfordelingsdata[
+                    Mandatfordelingsdata$År==2036, ]$Folketall)
+    )
+library("xtable")
+mandattabell <- function(år) {
+  m <- subset(Mandatfordelingsdata, År == år)
+  if (år == 2004) {
+    m$Endring <- m$Mandater - c(8, 15, 16, 8, 7, 7, 8, 6, 4, 5, 11,
+                                17, 5, 10, 10, 6, 12, 6, 4)
+  } else {
+    m$Endring <- m$Mandater - subset(Mandatfordelingsdata,
+                                     År == år - 8)$Mandater
+  }
+  m$År  <- NULL
+  m[m==0] <- NA
+  colnames(m)[3] <- "Areal/\\si{\\square\\kilo\\metre}"
+  mx <- print(xtable(m,
+                     caption = paste("Mandatfordeling ",
+                                     år + 1,
+                                     "--",
+                                     år + 9,
+                                     sep = ""),
+                     label = paste("tab:m",
+                                   år,
+                                   sep = ""),
+                     digits = 0,
+                     align = c("l", "l",
+                               "S[table-format = 6]",
+                               "S[table-format = 4]",
+                               "S[table-format = 2]",
+                               "S[table-format = -1,
+                               negative-color = red]")),
+              include.rownames = FALSE,
+              booktabs = TRUE,
+              print.results = FALSE,
+              caption.placement = "top",
+              sanitize.colnames.function = function(x){
+                return(paste("{", x, "}", sep = ""))
+              })
+  mx <- sub("begin\\{center\\}", "centering", mx)
+  mx <- sub("\\\\end\\{center\\}\n", "", mx)
+  cat(mx)
+}
+@
+
+<<tabeller, echo=FALSE, results='asis'>>=
+mandattabell(2004)
+mandattabell(2012)
+mandattabell(2020)
+mandattabell(2028)
+mandattabell(2036)
+@
+
+\end{document}
