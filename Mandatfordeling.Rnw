@@ -9,6 +9,7 @@
 \sisetup{locale = DE}
 \sisetup{mode = text}
 \sisetup{group-minimum-digits = 4}
+\usepackage[pdfusetitle,hidelinks]{hyperref}
 \begin{document}
 
 \title{Fordeling av stortingsmandatene}
@@ -22,6 +23,9 @@ Tabell~\ref{tab:m2004} og \ref{tab:m2012} bruker de faktiske tallene
 for folketall og areal, mens tabell~\ref{tab:m2020} til
 \ref{tab:m2036} bruker Statistisk sentralbyrås framskrevne
 befolkningstall.
+
+Data og kode er tilgjengelig fra GitHub.%
+\footnote{\url{https://github.com/hmalmedal/mandatfordeling}}
 
 <<init, echo=FALSE>>=
 source('mandater.R')

@@ -3,6 +3,8 @@ Fordeling av stortingsmandatene
 
 Dette er en oversikt over fordelingene av stortingsmandatene. De to første tabellene bruker de faktiske tallene for folketall og areal, mens resten bruker Statistisk sentralbyrås framskrevne befolkningstall.
 
+Data og kode er tilgjengelig fra [GitHub](https://github.com/hmalmedal/mandatfordeling).
+
 ```{r data,echo=FALSE}
 source('mandater.R')
 ```
