@@ -1,5 +1,5 @@
 Mandatfordelingsdata <-
-    read.csv("Mandatfordelingsdata.csv", sep=";")
+    read.csv("Mandatfordelingsdata.csv", sep=",")
 Mandatfordelingsdata <- transform(Mandatfordelingsdata,
                                   År=as.factor(År))
 source('saintelague.R')
