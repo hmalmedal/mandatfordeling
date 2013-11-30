@@ -22,14 +22,12 @@ mandattabell <- function(år) {
       }
   m$År  <- NULL
   m[m==0] <- NA
-  mx <- print(xtable(m,caption = paste("Mandatfordeling ",
-                                      år + 1,
-                                      "--",
-                                      år + 9,
-                                      sep = ""),
-                     label = paste("tab:m",
-                                   år,
-                                   sep = ""),
+  mx <- print(xtable(m,caption = paste0("Mandatfordeling ",
+                                        år + 1,
+                                        "--",
+                                        år + 9),
+                     label = paste0("tab:m",
+                                    år),
                      digits = 0),
               include.rownames = FALSE,
               print.results = FALSE,

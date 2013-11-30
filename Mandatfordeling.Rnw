@@ -43,14 +43,12 @@ mandattabell <- function(år) {
   m[m==0] <- NA
   colnames(m)[3] <- "Areal/\\si{\\square\\kilo\\metre}"
   mx <- print(xtable(m,
-                     caption = paste("Mandatfordeling ",
-                                     år + 1,
-                                     "--",
-                                     år + 9,
-                                     sep = ""),
-                     label = paste("tab:m",
-                                   år,
-                                   sep = ""),
+                     caption = paste0("Mandatfordeling ",
+                                      år + 1,
+                                      "--",
+                                      år + 9),
+                     label = paste0("tab:m",
+                                    år),
                      digits = 0,
                      align = c("l", "l",
                                "S[table-format = 6]",
@@ -63,7 +61,7 @@ mandattabell <- function(år) {
               print.results = FALSE,
               caption.placement = "top",
               sanitize.colnames.function = function(x){
-                return(paste("{", x, "}", sep = ""))
+                return(paste0("{", x, "}"))
               })
   mx <- sub("begin\\{center\\}", "centering", mx)
   mx <- sub("\\\\end\\{center\\}\n", "", mx)
