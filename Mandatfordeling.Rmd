@@ -1,5 +1,8 @@
-Fordeling av stortingsmandatene
-===============================
+---
+title: "Fordeling av stortingsmandatene"
+author: "Håkon Malmedal"
+output: html_document
+---
 
 Dette er en oversikt over fordelingene av stortingsmandatene. De to første tabellene bruker de faktiske tallene for folketall og areal, mens resten bruker Statistisk sentralbyrås framskrevne befolkningstall.
 
@@ -10,7 +13,6 @@ source('mandater.R')
 ```
 
 ```{r print, results = 'asis', echo = FALSE}
-library("xtable")
 mandattabell <- function(år) {
     m <- subset(Mandatfordelingsdata, År == år)
     if (år == 2004) {
@@ -21,20 +23,8 @@ mandattabell <- function(år) {
                                              År == år - 8)$Mandater
             }
     m$År  <- NULL
-    m[m == 0] <- NA
-    mx <- print(xtable(m, caption = paste0("Mandatfordeling ",
-                                           år + 1,
-                                           "--",
-                                           år + 9),
-                       label = paste0("tab:m",
-                                      år),
-                       digits = 0),
-                include.rownames = FALSE,
-                print.results = FALSE,
-                caption.placement = "top",
-                type = "html")
-    mx <- gsub("> -", "> &minus;", mx)
-    cat(mx)
+    knitr::kable(m, caption = paste0("Mandatfordeling ", år + 1, "--", år + 9),
+                 format = "pandoc", row.names = F)
     }
 ```
 
