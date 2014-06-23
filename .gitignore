@@ -1,12 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
-*-concordance.tex
 *.html
 *.log
-*.md
 *.pdf
 *.synctex.gz
 *.tex
-NA
-!README.md
