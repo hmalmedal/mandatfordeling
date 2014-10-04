@@ -24,7 +24,7 @@ mandattabell <- function(år) {
       }
   m$År  <- NULL
   knitr::kable(m, caption = paste0("Mandatfordeling ", år + 1, "--", år + 9),
-               format = "pandoc", row.names = F)
+               format = "pandoc", row.names = FALSE)
   }
 ```
 
