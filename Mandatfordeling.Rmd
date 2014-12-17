@@ -12,7 +12,7 @@ Data og kode er tilgjengelig fra [GitHub](https://github.com/hmalmedal/mandatfor
 source('mandater.R')
 ```
 
-```{r print, results = 'asis', echo = FALSE}
+```{r print, echo = FALSE}
 mandattabell <- function(år) {
   m <- subset(Mandatfordelingsdata, År == år)
   if (år == 2004) {
@@ -30,30 +30,30 @@ mandattabell <- function(år) {
 
 Første tabell:
 
-```{r 2004, results = 'asis', echo = FALSE}
+```{r 2004, echo = FALSE}
 mandattabell(2004)
 ```
 
 Andre tabell:
 
-```{r 2012, results = 'asis', echo = FALSE}
+```{r 2012, echo = FALSE}
 mandattabell(2012)
 ```
 
 Tredje tabell:
 
-```{r 2020, results = 'asis', echo = FALSE}
+```{r 2020, echo = FALSE}
 mandattabell(2020)
 ```
 
 Fjerde tabell:
 
-```{r 2028, results = 'asis', echo = FALSE}
+```{r 2028, echo = FALSE}
 mandattabell(2028)
 ```
 
 Femte tabell:
 
-```{r 2036, results = 'asis', echo = FALSE}
+```{r 2036, echo = FALSE}
 mandattabell(2036)
 ```
