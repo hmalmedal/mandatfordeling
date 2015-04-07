@@ -1,38 +1,7 @@
-Mandatfordelingsdata <-
-  read.csv("Mandatfordelingsdata.csv", sep = ",")
-Mandatfordelingsdata <- transform(Mandatfordelingsdata,
-                                  År = as.factor(År))
+library(readr)
+library(dplyr, warn.conflicts = FALSE)
 source('saintelague.R')
-Mandatfordelingsdata$Mandater <-
-  c(
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År == 2004, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År == 2004, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År == 2012, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År == 2012, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År == 2020, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År == 2020, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År == 2028, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År == 2028, ]$Folketall),
-    saintelague(169,
-                Mandatfordelingsdata[
-                  Mandatfordelingsdata$År == 2036, ]$Areal * 1.8
-                +
-                  Mandatfordelingsdata[
-                    Mandatfordelingsdata$År == 2036, ]$Folketall)
-  )
+
+Mandatfordelingsdata <- read_csv("Mandatfordelingsdata.csv") %>%
+  group_by(År) %>%
+  mutate(Mandater = saintelague(169, Areal * 1.8 + Folketall))
