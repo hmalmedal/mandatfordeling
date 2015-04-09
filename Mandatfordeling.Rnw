@@ -31,17 +31,11 @@ Data og kode er tilgjengelig fra GitHub.%
 source('mandater.R')
 library(xtable)
 mandattabell <- function(år) {
-  m <- subset(Mandatfordelingsdata, År == år)
-  if (år == 2004) {
-    m$Endring <- m$Mandater - c(8, 15, 16, 8, 7, 7, 8, 6, 4, 5, 11,
-                                17, 5, 10, 10, 6, 12, 6, 4)
-  } else {
-    m$Endring <- m$Mandater - subset(Mandatfordelingsdata,
-                                     År == år - 8)$Mandater
-  }
-  m$År  <- NULL
-  m[m == 0] <- NA
-  colnames(m)[3] <- "Areal/\\si{\\square\\kilo\\metre}"
+  m <- Mandatfordelingsdata %>%
+    filter(År == år) %>%
+    select(-År) %>%
+    rename(`Areal/\\si{\\square\\kilo\\metre}` = Areal) %>%
+    mutate(Endring = replace(Endring, Endring == 0, NA))
   mx <- print(xtable(m,
                      caption = paste0("Mandatfordeling ",
                                       år + 1,
