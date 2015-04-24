@@ -1,6 +1,6 @@
 library(readr)
 library(dplyr, warn.conflicts = FALSE)
-source('saintelague.R')
+source("saintelague.R")
 
 pre2004 <- c(8, 15, 16, 8, 7, 7, 8, 6, 4, 5, 11, 17, 5, 10, 10, 6, 12, 6, 4)
 Mandatfordelingsdata <- read_csv("Mandatfordelingsdata.csv") %>%

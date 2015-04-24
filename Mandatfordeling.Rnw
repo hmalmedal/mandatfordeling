@@ -28,7 +28,7 @@ Data og kode er tilgjengelig fra GitHub.%
 \footnote{\url{https://github.com/hmalmedal/mandatfordeling}}
 
 <<init, echo = FALSE>>=
-source('mandater.R')
+source("mandater.R")
 library(xtable)
 mandattabell <- function(år) {
   m <- Mandatfordelingsdata %>%
@@ -63,7 +63,7 @@ mandattabell <- function(år) {
 }
 @
 
-<<tabeller, echo = FALSE, results = 'asis'>>=
+<<tabeller, echo = FALSE, results = "asis">>=
 mandattabell(2004)
 mandattabell(2012)
 mandattabell(2020)

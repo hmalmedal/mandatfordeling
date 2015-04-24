@@ -9,7 +9,7 @@ Dette er en oversikt over fordelingene av stortingsmandatene. De to første tabe
 Data og kode er tilgjengelig fra [GitHub](https://github.com/hmalmedal/mandatfordeling).
 
 ```{r data, echo = FALSE}
-source('mandater.R')
+source("mandater.R")
 ```
 
 ```{r print, echo = FALSE}
