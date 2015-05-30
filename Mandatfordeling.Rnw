@@ -30,36 +30,25 @@ Data og kode er tilgjengelig fra GitHub.%
 <<init, echo = FALSE>>=
 source("mandater.R")
 library(xtable)
+library(stringr)
 mandattabell <- function(år) {
-  m <- Mandatfordelingsdata %>%
+  Mandatfordelingsdata %>%
     filter(År == år) %>%
     select(-År) %>%
     rename(`Areal/\\si{\\square\\kilo\\metre}` = Areal) %>%
-    mutate(Endring = replace(Endring, Endring == 0, NA))
-  mx <- print(xtable(m,
-                     caption = paste0("Mandatfordeling ",
-                                      år + 1,
-                                      "--",
-                                      år + 9),
-                     label = paste0("tab:m",
-                                    år),
-                     digits = 0,
-                     align = c("l", "l",
-                               "S[table-format = 6]",
-                               "S[table-format = 4]",
-                               "S[table-format = 2]",
-                               "S[table-format = -1,
-                               negative-color = red]")),
-              include.rownames = FALSE,
-              booktabs = TRUE,
-              print.results = FALSE,
-              caption.placement = "top",
-              sanitize.colnames.function = function(x){
-                return(paste0("{", x, "}"))
-              })
-  mx <- sub("begin\\{center\\}", "centering", mx)
-  mx <- sub("\\\\end\\{center\\}\n", "", mx)
-  cat(mx)
+    mutate(Endring = replace(Endring, Endring == 0, NA)) %>%
+    xtable(caption = str_c("Mandatfordeling ", år + 1, "--", år + 9),
+           label = str_c("tab:m", år),
+           digits = 0,
+           align = c("l", "l",
+                     "S[table-format = 6]",
+                     "S[table-format = 4]",
+                     "S[table-format = 2]",
+                     "S[table-format = -1, negative-color = red]")) %>%
+    print(include.rownames = FALSE,
+          booktabs = TRUE,
+          caption.placement = "top",
+          sanitize.colnames.function = function(x) str_c("{", x, "}"))
 }
 @
 
