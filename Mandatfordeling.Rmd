@@ -13,13 +13,13 @@ source("mandater.R")
 ```
 
 ```{r print, echo = FALSE}
+library(stringr)
 mandattabell <- function(år) {
   Mandatfordelingsdata %>%
     filter(År == år) %>%
     select(-År) %>%
-    knitr::kable(caption = paste0("Mandatfordeling ", år + 1, "--", år + 9),
-                 format = "pandoc", row.names = FALSE)
-  }
+    knitr::kable(caption = str_c("Mandatfordeling ", år + 1, "--", år + 9))
+}
 ```
 
 Første tabell:
