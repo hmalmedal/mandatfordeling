@@ -32,7 +32,7 @@ source("mandater.R")
 library(xtable)
 library(stringr)
 mandattabell <- function(år) {
-  Mandatfordelingsdata %>%
+  mandatfordelingsdata %>%
     filter(År == år) %>%
     select(-År) %>%
     rename(`Areal/\\si{\\square\\kilo\\metre}` = Areal) %>%

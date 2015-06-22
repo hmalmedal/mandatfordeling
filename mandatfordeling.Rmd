@@ -15,7 +15,7 @@ source("mandater.R")
 ```{r print, echo = FALSE}
 library(stringr)
 mandattabell <- function(år) {
-  Mandatfordelingsdata %>%
+  mandatfordelingsdata %>%
     filter(År == år) %>%
     select(-År) %>%
     knitr::kable(caption = str_c("Mandatfordeling ", år + 1, "--", år + 9))
