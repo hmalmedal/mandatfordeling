@@ -35,7 +35,7 @@ mandattabell <- function(år) {
   mandatfordelingsdata %>%
     filter(År == år) %>%
     select(-År) %>%
-    rename(`Areal/\\si{\\square\\kilo\\metre}` = Areal) %>%
+    rename(`Areal, \\si{\\square\\kilo\\metre}` = Areal) %>%
     mutate(Endring = replace(Endring, Endring == 0, NA)) %>%
     xtable(caption = str_c("Mandatfordeling ", år + 1, "--", år + 9),
            label = str_c("tab:m", år),
