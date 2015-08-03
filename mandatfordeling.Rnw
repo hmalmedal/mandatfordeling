@@ -27,7 +27,7 @@ befolkningstall.
 Data og kode er tilgjengelig fra GitHub.%
 \footnote{\url{https://github.com/hmalmedal/mandatfordeling}}
 
-<<init, echo = FALSE>>=
+<<init, echo = FALSE, message = FALSE>>=
 source("mandater.R")
 library(xtable)
 library(stringr)
