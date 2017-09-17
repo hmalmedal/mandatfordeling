@@ -1,10 +1,15 @@
-saintelague <- function(r, v, mod = 1) {
-  s <- rep.int(0, length(v))
-  while (sum(s) < r) {
-    k <- v / (2 * s + 1)
-    k[s == 0] <- v[s == 0] / mod
-    i <- which.max(k)
-    s[i] <- s[i] + 1
+saintelague <- function(votes, available_seats, modifier = 1) {
+  seats <- rep(0, length(votes))
+
+  for (j in seq_len(available_seats)) {
+    divisors <- 2 * seats + 1
+    divisors[seats == 0] <- modifier
+
+    quotients <- votes / divisors
+
+    i <- which.max(quotients)
+    seats[i] <- seats[i] + 1
   }
-  return(s)
+
+  seats
 }
